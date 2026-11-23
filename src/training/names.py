@@ -1,0 +1,1 @@
+COLUMNS_DF = ["exp_name", "version", "model_name", "step", "best_score", "best_model_path", "time_per_epoch", "trained_epochs", "total_params", "trainable_params", "emissions_kg_Co2"]

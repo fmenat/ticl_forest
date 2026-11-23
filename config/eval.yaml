@@ -1,0 +1,85 @@
+data_folder: /path/to/data/folder
+dataset_name: Disturbances_64_2017_2023_agresta 
+
+device: [0]
+pre_load_data: False
+load_memory: True
+num_workers: 4
+
+dataset_config: 
+  start_time: 2017
+  end_time: 2023
+
+  batch_size: 128 
+
+  val_type: spatial 
+  train_val_split_args: #should be same used for training
+    random_state: 42 #42, 10
+    sample_train: 800
+
+    #EFID
+    sample_val: 200
+    sample_test: 800 #corresponding to ~30% of data
+
+    #AGRESTA
+    #sample_test: 100
+    
+
+model_folder: storage_path: /path/to/storage/folder
+
+exp_name:  [ 
+  [fresh,  encdec, 0],
+  [fresh,  encdec, 1],
+  [fresh,  encdec, 2],
+  [concat, encdec, 0],
+  [concat, encdec, 1],
+  [concat, encdec, 2],
+  [fine,   encdec_v0, 0],
+  [fine,   encdec_v0, 1],
+  [fine,   encdec_v0, 2], 
+  [fine,   encdec_v1, 0],
+  [fine,   encdec_v1, 1],
+  [fine,   encdec_v1, 2], 
+  [fine,   encdec_v2, 0],
+  [fine,   encdec_v2, 1],
+  [fine,   encdec_v2, 2], 
+  [ewc,  encdec_v0, 0],
+  [ewc,  encdec_v0, 1],
+  [ewc,  encdec_v0, 2],
+  [ewc,  encdec_v1, 0],
+  [ewc,  encdec_v1, 1],
+  [ewc,  encdec_v1, 2],
+  [ewc,  encdec_v2, 0],
+  [ewc,  encdec_v2, 1],
+  [ewc,  encdec_v2, 2],
+  [lwf,  encdec_v0, 0],
+  [lwf,  encdec_v0, 1],
+  [lwf,  encdec_v0, 2],
+  [lwf,  encdec_v1, 0],
+  [lwf,  encdec_v1, 1],
+  [lwf,  encdec_v1, 2],
+  [lwf,  encdec_v2, 0],
+  [lwf,  encdec_v2, 1],
+  [lwf,  encdec_v2, 2],
+  [modular, encdec_v0, 0],
+  [modular, encdec_v0, 1],
+  [modular, encdec_v0, 2],
+  [modular, encdec_v1, 0],
+  [modular, encdec_v1, 1],
+  [modular, encdec_v1, 2],
+  [modular, encdec_v2, 0],
+  [modular, encdec_v2, 1],
+  [modular, encdec_v2, 2],
+  [replay,  encdec_v0, 0],
+  [replay,  encdec_v0, 1],
+  [replay,  encdec_v0, 2],
+  [replay,  encdec_v1, 0],
+  [replay,  encdec_v1, 1],
+  [replay,  encdec_v1, 2],
+  [replay,  encdec_v2, 0],
+  [replay,  encdec_v2, 1],
+  [replay,  encdec_v2, 2],
+]
+
+
+

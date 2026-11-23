@@ -1,0 +1,45 @@
+data_folder: /path/to/data/folder
+dataset_name: Disturbances_64_2017_2023_agresta 
+
+storage_path: /pah/to/storage/folder
+
+device: [0]
+pre_load_data: False
+load_memory: True
+num_workers: 4
+
+dataset_config: 
+  start_time: 2017
+  end_time: 2023
+
+  batch_size: 128 
+
+  val_type: spatial 
+  train_val_split_args: #should be same used for training
+    random_state: 10 #42, 10
+    sample_train: 500
+
+    #EFID
+    #sample_val: 200
+    #sample_test: 800 #corresponding to ~30% of data
+
+    #AGRESTA
+    sample_test: 100
+    
+
+model_folder: /path/to/storage/folder/from/efid
+
+exp_name:  [ 
+  [fine,   encdec_v0, 0],
+  [fine,   encdec_v0, 1],
+  [fine,   encdec_v0, 2], 
+  [fine,   encdec_v1, 0],
+  [fine,   encdec_v1, 1],
+  [fine,   encdec_v1, 2], 
+  [fine,   encdec_v2, 0],
+  [fine,   encdec_v2, 1],
+  [fine,   encdec_v2, 2], 
+]
+
+
+

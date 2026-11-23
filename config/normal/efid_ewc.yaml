@@ -1,0 +1,75 @@
+data_folder: /path/to/data/folder
+dataset_name: Disturbances_64_2017_2023_efid 
+
+storage_path: /path/to/storage/folder
+
+
+device: [0]
+load_memory: True 
+num_workers: 6
+
+exp_data: 
+  exp_name: encdec 
+  #version: 0
+
+incremental_strategy:
+  fixed_incremental_start: True
+  method: ewc
+  method_args: #loss args
+    #lambda_ewc: 0.00277892
+    lambda_ewc: 0.00161243
+    #gamma: 0.998708
+    gamma: 0.961094
+
+dataset_config: 
+  start_from_step: 2018 #2018, 2020
+  val_type: spatial 
+  train_val_split_args:
+    random_state: 42
+    sample_train: 100 
+    sample_val: 200
+    sample_test: 800 #corresponding to ~30% of data
+
+  lag_year: 2
+  extra_bands: 
+    alphaearth: []
+
+  scaler_per_sensor:
+    alphaearth: #standard
+    
+
+
+training:
+  update_loss_weights: False
+
+  batch_size: 8
+  epochs: 100
+  stopping:
+    mode_stopval: max
+    metric_stopval: 1_f1
+    min_delta: 0.0001
+    patience: 15
+
+  optimization: 
+    lr: 0.002607
+    weight_decay: 0.006452
+    optimizer: adamw
+
+  augmentation_params:
+    vertical_prob: 0.2
+    horizontal_prob: 0.4
+    rotate_prob: 0.1
+    noise_prob: 0.6
+    crop_size: 16
+  
+
+loss_args:
+  main_args:
+    weight: [ 0.5,  3] #calcualte on all dataset
+  
+  macro_args:
+    dice_target_class: 1 
+    training_masking: all 
+    validation_masking: all
+    weight:
+      dice: 2.442256

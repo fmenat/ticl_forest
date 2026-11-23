@@ -1,0 +1,81 @@
+data_folder: /path/to/data/folder
+dataset_name: Alpha_dataset64 
+
+storage_path: /path/to/storage/folder
+
+
+device: [0]
+load_memory: True 
+num_workers: 2
+
+model:
+  type: encdec
+  encoder_args:
+    alphaearth:
+      n_feats: 64
+      type: tdcnn_simple
+      temporal_aggregation: concatenate
+      act: gelu
+      dropout: 0.0
+      filters: [64]
+      new_layers: true
+  decoder_args:
+    filters: []
+    head_args:
+      new_layers: false
+
+
+dataset_config: 
+  start_from_step: 2020 
+
+  val_type: spatial 
+  train_val_split_args:
+    random_state: 10 
+    #sample_train: 0.7
+    sample_val: 0.1
+    sample_test: 0.3
+
+  lag_year: 2
+  extra_bands: 
+    alphaearth: []
+
+  scaler_per_sensor:
+    alphaearth: #standard
+    position: #None
+    
+
+
+training:
+  update_loss_weights: True
+
+  batch_size: 32
+  epochs: 100
+  stopping:
+    mode_stopval: max
+    metric_stopval: 1_f1
+    min_delta: 0.0001
+    patience: 15
+
+  optimization: 
+    lr: 0.006092 
+    weight_decay: 0.000001 
+    optimizer: adamw
+
+  augmentation_params:
+    vertical_prob: 0.9 
+    horizontal_prob: 0.3 
+    rotate_prob: 0.9 
+    noise_prob: 0.3 
+    crop_size: 16
+  
+
+loss_args:
+  main_args:
+    weight: [ 0.5,  3] #calcualte on all dataset
+  
+  macro_args:
+    dice_target_class: 1 
+    training_masking: all 
+    validation_masking: all
+    weight:
+      dice: 9.169590 
